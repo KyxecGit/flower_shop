@@ -24,6 +24,16 @@ def get_all_flowers():
     conn.close()
     return flowers
 
+# Функция для получения информации о конкретном цветке по ID
+def get_flower_by_id(flower_id):
+    conn = sqlite3.connect('flowers.db')
+    c = conn.cursor()
+    c.execute('''SELECT * FROM flowers WHERE id=?''', (flower_id,))
+    flower = c.fetchone()
+    conn.close()
+    return flower
+
+
 # Функция для добавления цветка в базу данных
 def add_flower(name, description, price, quantity, image_path):
     conn = sqlite3.connect('flowers.db')
