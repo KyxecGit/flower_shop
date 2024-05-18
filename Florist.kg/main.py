@@ -8,6 +8,15 @@ def index():
     flowers = get_all_flowers()
     return render_template('index.html', flowers=flowers)
 
+@app.route('/flower/<int:flower_id>')
+def flower_detail(flower_id):
+    flower = get_flower_by_id(flower_id)
+    if flower:
+        return render_template('flower_detail.html', flower=flower)
+    else:
+        return "Flower not found", 404
+
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
